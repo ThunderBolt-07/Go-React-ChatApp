@@ -1,0 +1,183 @@
+/* Make container full screen */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw; /* Full width */
+  max-width: 100%;
+  background-color: #e5ddd5;
+  font-family: "Segoe UI", sans-serif;
+}
+
+
+/* Scrollable area for messages */
+.chat-log {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Message bubbles */
+.chat-bubble {
+  color:#000;
+  max-width: 65%;
+  padding: 10px 14px;
+  background-color: #dcf8c6;
+  border-radius: 8px 8px 0 8px;
+  align-self: flex-end;
+  word-wrap: break-word;
+  font-size: 0.95rem;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  transition: background 0.3s ease;
+}
+
+.chat-bubble.received {
+  color:#000;
+  align-self: flex-start;
+  background-color: #fff;
+  border-radius: 8px 8px 8px 0;
+}
+
+/* Chat form (message input) */
+.chat-form {
+  display: flex;
+  padding: 10px;
+  color:#000;
+  background-color: #f0f0f0;
+  border-top: 1px solid #ddd;
+  gap: 10px;
+}
+
+.chat-form input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  background-color: #fff;
+  color: black;
+}
+
+.chat-form button {
+  padding: 10px 20px;
+  background-color: #075e54;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.chat-form button:hover {
+  background-color: #06473e;
+}
+
+/* Upload section */
+#uploadSection {
+  display: flex;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-top: 1px solid #ccc;
+  align-items: center;
+  gap: 10px;
+}
+
+#uploadSection input[type="file"] {
+  flex: 1;
+}
+
+#fileBtn {
+  background: #25d366;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+/* File message styling */
+.file-message {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.file-details {
+  font-weight: bold;
+  word-break: break-all;
+}
+
+.download-btn {
+  text-decoration: none;
+  color: white;
+  background-color: #128c7e;
+  padding: 6px 12px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 0.9rem;
+  width: fit-content;
+  transition: background 0.3s ease;
+}
+
+.download-btn:hover {
+  background-color: #0d6f64;
+}
+
+.upload-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-top: 1px solid #ddd;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 8px 14px;
+  color: white;
+  background-color: #007bff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.custom-file-upload:hover {
+  background-color: #0056b3;
+}
+
+.custom-file-upload input[type="file"] {
+  display: none;
+}
+
+#file-name {
+  font-size: 0.95rem;
+  color: black;
+  max-width: 300px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+#fileBtn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#fileBtn:hover {
+  background-color: #218838;
+}
+

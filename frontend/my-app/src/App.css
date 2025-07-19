@@ -1,0 +1,15 @@
+/* App.css — global layout fix */
+html, body, #root {
+  height: 100%;
+  width:100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f0f4f8;
+}
+
+/* Make React root component fill screen */
+#root {
+  display: flex;
+  flex-direction: column;
+}
