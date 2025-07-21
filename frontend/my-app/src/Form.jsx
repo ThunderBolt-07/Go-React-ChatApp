@@ -24,8 +24,8 @@ function Form({ setIsConnected, setName }) {
     //   }:8000/ws?username=${encodeURIComponent(userName)}`
 
     // );
-    console.log("sendig req to ",`wss${origin}/ws?username=${encodeURIComponent(userName)}`)
-    conn.current = new WebSocket(`wss${origin}/ws?username=${encodeURIComponent(userName)}`);
+    console.log("sendig req to ",`wss://${origin}/ws?username=${encodeURIComponent(userName)}`)
+    conn.current = new WebSocket(`wss://${origin}/ws?username=${encodeURIComponent(userName)}`);
 
     conn.current.onopen = () => {
       //conn.current.send("hi");
