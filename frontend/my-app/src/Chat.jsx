@@ -26,7 +26,7 @@ function Chat() {
       formData.append("upload", file); // your backend should expect "upload" field
       formData.append("userName", userName.current);
 
-      fetch(`${origin}/file`, {
+      fetch(`https://${origin}/file`, {
         method: "POST",
         body: formData,
       })
