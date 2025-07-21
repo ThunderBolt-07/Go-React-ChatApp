@@ -23,7 +23,7 @@ function Form({ setIsConnected, setName }) {
     //     window.location.hostname
     //   }:8000/ws?username=${encodeURIComponent(userName)}`
     // );
-    conn.current = new WebSocket(`ws${origin.substring(4)}/ws?username=${encodeURIComponent(userName)}`);
+    conn.current = new WebSocket(`wss${origin.substring(4)}/ws?username=${encodeURIComponent(userName)}`);
 
     conn.current.onopen = () => {
       //conn.current.send("hi");
