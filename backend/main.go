@@ -46,7 +46,16 @@ func main() {
 			return
 		}
 
-		files.FileUpload(w, r, hub)
+		err := files.FileUpload(w, r, hub)
+
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			w.Write([]byte("some error occured while sneding file"))
+			return
+
+		}
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte("sending file was a success"))
 
 	})
 	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {

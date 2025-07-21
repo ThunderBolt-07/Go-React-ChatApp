@@ -14,6 +14,8 @@ import (
 	"github.com/joho/godotenv"
 )
 
+var region string
+
 func MakeAWSClient() (*s3.Client, error) {
 	godotenv.Load()
 	aws_key := os.Getenv("AWS_ACCESS_KEY_ID")
@@ -24,6 +26,11 @@ func MakeAWSClient() (*s3.Client, error) {
 	if aws_secret == "" {
 		log.Fatal("uable to load aws secret from env")
 	}
+	region = os.Getenv("AWS_REGION")
+	if region == "" {
+		log.Fatal("uable to load aws region fro. env")
+
+	}
 	cfg, err := config.LoadDefaultConfig(context.TODO(),
 		config.WithCredentialsProvider(credentials.NewStaticCredentialsProvider(
 			aws_key,
@@ -32,6 +39,7 @@ func MakeAWSClient() (*s3.Client, error) {
 		)),
 		//config.WithRegion("us-west-1"), // change as needed
 	)
+	config.WithRegion(region)
 	if err != nil {
 		log.Fatalf("failed to load config: %v", err)
 		return nil, err

@@ -35,16 +35,16 @@ function Chat() {
           const div = document.createElement("div");
           console.log("mesage is ",msg)
 
-          const data = JSON.parse(msg);
-          console.log("decoded file msg is ", data);
-          div.className =
-            msg.sender === userName ? "chat-bubble.received" : "chat-bubble";
-          div.innerHTML = `
-        <a href="${msg}" download style="color: #000;">
-          📎 Download File
-        </a>
-      `;
-          document.getElementById("log").appendChild(div);
+      //     const data = JSON.parse(msg);
+      //     console.log("decoded file msg is ", data);
+      //     div.className =
+      //       msg.sender === userName ? "chat-bubble.received" : "chat-bubble";
+      //     div.innerHTML = `
+      //   <a href="${msg}" download style="color: #000;">
+      //     📎 Download File
+      //   </a>
+      // `;
+      //     document.getElementById("log").appendChild(div);
         })
         .catch((err) => {
           const errDiv = document.createElement("div");

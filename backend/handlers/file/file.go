@@ -27,7 +27,7 @@ func SetupClient() error {
 	Client = c
 	return nil
 }
-func FileUpload(w http.ResponseWriter, r *http.Request, hub *ws.Hub) {
+func FileUpload(w http.ResponseWriter, r *http.Request, hub *ws.Hub) error {
 	log.Println("got a file")
 	r.ParseMultipartForm(100 << 20)
 	file, fileHeader, err := r.FormFile("upload")
@@ -36,18 +36,18 @@ func FileUpload(w http.ResponseWriter, r *http.Request, hub *ws.Hub) {
 
 	if !ok {
 		log.Printf("user name %s not found in Hub ", userName)
-		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte("socket connection dead"))
-		return
+		//w.WriteHeader(http.StatusBadRequest)
+		//w.Write([]byte("socket connection dead"))
+		return err
 
 	}
 
 	if err != nil {
 		log.Println("error occured while getting form file in file upload", err)
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("error occured while access form file"))
+		//w.WriteHeader(http.StatusInternalServerError)
+		//w.Write([]byte("error occured while access form file"))
 
-		return
+		return err
 	}
 
 	fileName := fileHeader.Filename
@@ -56,17 +56,17 @@ func FileUpload(w http.ResponseWriter, r *http.Request, hub *ws.Hub) {
 
 	if err != nil {
 		log.Println("error occured while reading form file", err)
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("error occured while reading form file"))
-		return
+		//w.WriteHeader(http.StatusInternalServerError)
+		//w.Write([]byte("error occured while reading form file"))
+		return err
 	}
 
 	dir, err := os.Getwd()
 	if err != nil {
 		log.Println("error occured while getting wd path", err)
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("error occured while reading form file"))
-		return
+		//w.WriteHeader(http.StatusInternalServerError)
+		//w.Write([]byte("error occured while reading form file"))
+		return err
 	}
 
 	reader := bytes.NewReader(data)
@@ -81,9 +81,9 @@ func FileUpload(w http.ResponseWriter, r *http.Request, hub *ws.Hub) {
 
 	if err != nil {
 		log.Println("error ocuured while creating temp file", err)
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("error occured while reading form file"))
-		return
+		//w.WriteHeader(http.StatusInternalServerError)
+		//w.Write([]byte("error occured while reading form file"))
+		return err
 	}
 
 	io.Copy(tempFile, reader)
@@ -91,26 +91,26 @@ func FileUpload(w http.ResponseWriter, r *http.Request, hub *ws.Hub) {
 	tempFile, err = os.Open(tempFile.Name())
 	if err != nil {
 		log.Println("error ocuured while opening temp file", err)
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("error occured while reading form file"))
-		return
+		//w.WriteHeader(http.StatusInternalServerError)
+		//w.Write([]byte("error occured while reading form file"))
+		return err
 	}
 	err = UploadFile(Client, tempFile, fileName)
 
 	if err != nil {
 		log.Println("error occured while uplaoding file ", err)
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("error occured while uploading form file"))
-		return
+		//w.WriteHeader(http.StatusInternalServerError)
+		//w.Write([]byte("error occured while uploading form file"))
+		return err
 	}
 
 	url, err := GetFileDownlaodUrl(Client, fileName)
 
 	if err != nil {
 		log.Println("error occured while getting file url", err)
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("error occured while uploading form file"))
-		return
+		//w.WriteHeader(http.StatusInternalServerError)
+		//w.Write([]byte("error occured while uploading form file"))
+		return err
 	}
 	// urlFile := types.UrlFile{
 	// 	Url:url,
@@ -122,14 +122,17 @@ func FileUpload(w http.ResponseWriter, r *http.Request, hub *ws.Hub) {
 	bm, err := json.Marshal(msg)
 	if err != nil {
 		log.Println("erro occured why conv send file data to byte from json", err)
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("error occured while uploading form file"))
-		return
+		//w.WriteHeader(http.StatusInternalServerError)
+		//w.Write([]byte("error occured while uploading form file"))
+		return err
 
 	}
 	chatClient.Hub.Broadcast <- bm
 	log.Println("file uplaod suuccess ", err)
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("file uploaded success"))
+	//w.WriteHeader(http.StatusOK)
+	// message := ws.SendMessage{c.Name, string(p)}
+	// msg,_ :=json.Marshal()
+	//w.Write([]byte(json.Marshal()))
+	return nil
 
 }
