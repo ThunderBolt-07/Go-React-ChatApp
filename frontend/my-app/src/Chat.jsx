@@ -33,6 +33,8 @@ function Chat() {
         .then((res) => res.text())
         .then((msg) => {
           const div = document.createElement("div");
+          console.log("mesage is ",msg)
+
           const data = JSON.parse(msg);
           console.log("decoded file msg is ", data);
           div.className =
