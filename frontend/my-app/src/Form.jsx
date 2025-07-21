@@ -14,7 +14,7 @@ function Form({ setIsConnected, setName }) {
     name.current = userName;
     const origin= import.meta.env.VITE_BACKEND_ORIGIN;
 
-  console.log("backen dis at ", origin.substring(4))
+  console.log("backen dis at ", origin)
 
     // conn.current = new WebSocket(`ws://localhost:8000/ws?username=${encodeURIComponent(userName)}`);
     // const protocol = window.location.protocol === "https:" ? "wss" : "ws";
@@ -22,8 +22,10 @@ function Form({ setIsConnected, setName }) {
     //   `${protocol}://${
     //     window.location.hostname
     //   }:8000/ws?username=${encodeURIComponent(userName)}`
+
     // );
-    conn.current = new WebSocket(`wss${origin.substring(4)}/ws?username=${encodeURIComponent(userName)}`);
+    console.log("sendig req to ",`wss${origin}/ws?username=${encodeURIComponent(userName)}`)
+    conn.current = new WebSocket(`wss${origin}/ws?username=${encodeURIComponent(userName)}`);
 
     conn.current.onopen = () => {
       //conn.current.send("hi");
